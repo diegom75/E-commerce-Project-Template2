@@ -13,7 +13,9 @@
       "livePreview.autoRefreshPreview": "On",
       "editor.formatOnSave": true,
       "prettier.enable": true,
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.minimap.enabled": false,
+    "editor.wordWrap": "on"
     }
   }
 }
