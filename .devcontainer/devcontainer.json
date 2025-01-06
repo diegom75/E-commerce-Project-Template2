@@ -1,21 +1,33 @@
 {
-  "name": "Form Test Project",
+  "name": "Ecom Site Project",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "customizations": {
-    "vscode": {
+    "codespaces": {
       "extensions": [
-        "esbenp.prettier-vscode", // Prettier/Prettify
-        "ms-vsliveshare.vsliveshare", // Live Share
-        "ms-vscode.live-server" // Live Preview
+        "negokaz.live-server-preview",
+        "esbenp.prettier-vscode",
+        "MS-vsliveshare.vsliveshare"
       ]
     },
     "settings": {
-      "livePreview.autoRefreshPreview": "On",
+      "terminal.integrated.shell.linux": "/bin/bash",
+      "terminal.integrated.shellArgs.linux": ["-l"],
+      "editor.formatOnPaste": true,
       "editor.formatOnSave": true,
-      "prettier.enable": true,
       "editor.defaultFormatter": "esbenp.prettier-vscode",
-          "editor.minimap.enabled": false,
-    "editor.wordWrap": "on"
+      "editor.wordWrap": "on",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      },
+      "prettier.singleQuote": true,
+      "prettier.trailingComma": "all",
+      "prettier.arrowParens": "always",
+      "prettier.jsxSingleQuote": true,
+      "prettier.jsxBracketSameLine": true,
+      "prettier.printWidth": 80,
+      "prettier.tabWidth": 2,
+      "prettier.useTabs": false,
+      "git.autofetch": true
     }
   }
 }
