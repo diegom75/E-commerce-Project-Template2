@@ -179,12 +179,13 @@
         const query = new URLSearchParams(window.location.search);
         console.log(Array.from(query.entries()));
         const cart = Array.from(query.entries());
+        // displays what is inside the cart
         function renderCart() {
           const cartList = document.getElementById('cart-summary');
           let cartItem = '';
           for (let [key, value] of cart) {
+            cartItem += `<p> ${key} ${value} </p>`;
             console.log(key, value);
-            cartItem += `<p> ${key}${value} </p>`;
           }
           cartList.innerHTML = cartItem;
         }
