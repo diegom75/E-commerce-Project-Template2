@@ -75,8 +75,14 @@
       crossorigin="anonymous"
     ></script>
     <script>
+      // shows products
       document.addEventListener("DOMContentLoaded", function () {
-        
+          const query = new URLSearchParams(window.location.search);
+          console.log(Array.from(query.entries()));
+          const cart = Array.from(query.entries());
+          let cartItem = '';
+          
+          
         });
     </script>
   </body>
