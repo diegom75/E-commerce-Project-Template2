@@ -203,7 +203,7 @@
             } else if (key.includes('price')) {
               // pushs price values to total in order to do tax and final total
               total.push(parseFloat(value));
-              cartItem += `<p> ${value} </p>`;
+              cartItem += `<p> $${value} </p>`;
             } else {
             cartItem += `<h5> ${value} </h5>`;
             console.log(key, value);
@@ -230,11 +230,11 @@
           localtotal = parseFloat((subtotal + tax).toFixed(2))
 
           console.log(subtotal);
-          itemTotal += `<p> Subtotal: ${subtotal} </p>`;
+          itemTotal += `<p> Subtotal: $${subtotal} </p>`;
           console.log(tax);
-          itemTotal += `<p> Tax: ${tax} (15%) </p>`;
+          itemTotal += `<p> Tax: $${tax} (15%) </p>`;
           console.log(localtotal);
-          itemTotal += `<h4> Total: ${localtotal} </h4>`;
+          itemTotal += `<h4> Total: $${localtotal} </h4>`;
           totalSummary.innerHTML = itemTotal;
         }
 
