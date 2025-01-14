@@ -45,6 +45,10 @@
       <div id="cart-summary">
         <!-- Cart summary will be dynamically inserted here -->
       </div>
+      <h1>Total</h1>
+      <div id="subtotal">
+        <!-- Total and Tax should appear here -->
+      </div>
       <form id="checkout-form">
         <h2>Login</h2>
         <div class="form-group">
@@ -179,17 +183,47 @@
         const query = new URLSearchParams(window.location.search);
         console.log(Array.from(query.entries()));
         const cart = Array.from(query.entries());
+        const total = [];
+        /* 
+        
+        goals for code:
+
+        1. make it merge when multiple products are added
+        
+        */ 
         // displays what is inside the cart
         function renderCart() {
           const cartList = document.getElementById('cart-summary');
           let cartItem = '';
           for (let [key, value] of cart) {
-            cartItem += `<p> ${key} ${value} </p>`;
+            // fitlering system to use to check on what type of item is being displayed here
+            if (key.includes('id')) {
+              // detects id and removes them from appearing
+              console.log("id detected");
+            } else if (key.includes('price')) {
+              // pushs price values to total in order to do tax and final total
+              total.push(parseFloat(value));
+              cartItem += `<p> ${value} </p>`;
+            } else {
+            cartItem += `<h5> ${value} </h5>`;
             console.log(key, value);
+            }
           }
+          // puts all items in cart
           cartList.innerHTML = cartItem;
         }
+        
+        function priceCheck() {
+          for () {
+            
+          }
+        }
+
+        // renders cart
+        // priceCheck();
         renderCart();
+
+        console.log(total);
       });
     </script>
   </body>
