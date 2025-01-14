@@ -46,7 +46,7 @@
         <!-- Cart summary will be dynamically inserted here -->
       </div>
       <h1>Total</h1>
-      <div id="subtotal">
+      <div id="total-summary">
         <!-- Total and Tax should appear here -->
       </div>
       <form id="checkout-form">
@@ -214,14 +214,34 @@
         }
         
         function priceCheck() {
-          for () {
-            
+          // local variable set up
+          const totalSummary = document.getElementById('total-summary');
+          let itemTotal = ''
+          let prices = total
+          let subtotal = 0
+          let tax = 0
+          let localtotal = 0
+          // runs loops
+          for (let i = 0; prices.length > i; i++) {
+            subtotal += prices[i];
           }
+          // runs final price check
+          tax = parseFloat((subtotal * 0.15).toFixed(2))
+          localtotal = parseFloat((subtotal + tax).toFixed(2))
+
+          console.log(subtotal);
+          itemTotal += `<p> Subtotal: ${subtotal} </p>`;
+          console.log(tax);
+          itemTotal += `<p> Tax: ${tax} (15%) </p>`;
+          console.log(localtotal);
+          itemTotal += `<h4> Total: ${localtotal} </h4>`;
+          totalSummary.innerHTML = itemTotal;
         }
 
         // renders cart
         // priceCheck();
         renderCart();
+        priceCheck();
 
         console.log(total);
       });
