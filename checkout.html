@@ -180,71 +180,30 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        const query = new URLSearchParams(window.location.search);
-        console.log(Array.from(query.entries()));
-        const cart = Array.from(query.entries());
-        const total = [];
-        /* 
-        
-        goals for code:
+      
+        const urlParam = new URLSearchParams(window.location.search);
+        const cartSummary = document.getElementById('cart-summary');
+        // First collects all of the parameters into separate arrays
+        const ids = urlParams.getAll('id');
+        const names = urlParams.getAll('name');
+        const prices = urlParams.getAll('prices')
 
-        1. make it merge when multiple products are added
-        
-        */ 
-        // displays what is inside the cart
-        function renderCart() {
-          const cartList = document.getElementById('cart-summary');
-          let cartItem = '';
-          for (let [key, value] of cart) {
-            // fitlering system to use to check on what type of item is being displayed here
-            if (key.includes('id')) {
-              // detects id and removes them from appearing
-              console.log("id detected");
-            } else if (key.includes('price')) {
-              // pushs price values to total in order to do tax and final total
-              total.push(parseFloat(value));
-              cartItem += `<p> $${value} </p>`;
-            } else {
-            cartItem += `<h5> ${value} </h5>`;
-            console.log(key, value);
-            }
-          }
-          // puts all items in cart
-          cartList.innerHTML = cartItem;
+        // Create cart items using a basic for loop
+        const cartItems = [];
+        let cartItem = ''
+        for (let i = 0; i < ids.length; i++) {
+          cartItem += `
+          <div class="cart-item">
+            <h5>${names[i]}</h5>
+            <p>${parseFloat(prices[i]).toFixed(2)}</p>
+            <input type="hidden" name="id" value="${ids[i]}">
+            <input type="hidden" name="name" value="${names[i]}">
+            <input type="hidden" name="price" value="${prices[i]}">
+          `
         }
-        
-        function priceCheck() {
-          // local variable set up
-          const totalSummary = document.getElementById('total-summary');
-          let itemTotal = ''
-          let prices = total
-          let subtotal = 0
-          let tax = 0
-          let localtotal = 0
-          // runs loops
-          for (let i = 0; prices.length > i; i++) {
-            subtotal += prices[i];
-          }
-          // runs final price check
-          tax = parseFloat((subtotal * 0.15).toFixed(2))
-          localtotal = parseFloat((subtotal + tax).toFixed(2))
-
-          console.log(subtotal);
-          itemTotal += `<p> Subtotal: $${subtotal} </p>`;
-          console.log(tax);
-          itemTotal += `<p> Tax: $${tax} (15%) </p>`;
-          console.log(localtotal);
-          itemTotal += `<h4> Total: $${localtotal} </h4>`;
-          totalSummary.innerHTML = itemTotal;
-        }
-
-        // renders cart
-        // priceCheck();
-        renderCart();
-        priceCheck();
-
-        console.log(total);
+      cartSummary.innerHTML = cartItem;
       });
+
     </script>
   </body>
 </html>
