@@ -211,7 +211,10 @@
         console.log("submitted form");
         fetch('users.json').then(response => response.json()).then(data => {
           data.forEach(user => {
-            console.log(user)
+            const email = document.getElementById('email').value;
+            console.log(email);
+            const exists = data.some(user => user.email == email);
+            console.log(exists)
           });
         });
       }
