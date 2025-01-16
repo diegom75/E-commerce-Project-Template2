@@ -203,6 +203,20 @@
         }
       cartSummary.innerHTML = cartItem;
 
+      document.querySelector('#checkout-form').addEventListener('submit', submitCart);
+
+      function submitCart(event) {
+        event.preventDefault();
+        console.log('submitted');
+        fetch('users.json')
+          .then(response => response.json())
+          .then(data => {
+            data.forEach(user => {
+              console.log(user);
+            });
+          });
+      }
+
         // Calculate prices from all products
 
         let total = 0
