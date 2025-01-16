@@ -41,6 +41,7 @@
     </nav>
 
     <div class="container mt-5">
+      <form id="checkout-form" action="confirmation.html" method="get"></form>
       <h1>Checkout</h1>
       <div id="cart-summary">
         <!-- Cart summary will be dynamically inserted here -->
@@ -185,8 +186,8 @@
         const cartSummary = document.getElementById('cart-summary');
         // First collects all of the parameters into separate arrays
         const ids = urlParams.getAll('id');
-        const names = urlParams.getAll('names');
-        const prices = urlParams.getAll('prices')
+        const names = urlParams.getAll('name');
+        const prices = urlParams.getAll('price')
 
         // Create cart items using a basic for loop
         const cartItems = [];
@@ -207,40 +208,16 @@
 
       function submitCart(event) {
         event.preventDefault();
-        console.log('submitted');
-        fetch('users.json')
-          .then(response => response.json())
-          .then(data => {
-            data.forEach(user => {
-              console.log(user);
-            });
+        console.log("submitted form");
+        fetch('users.json').then(response => response.json()).then(data => {
+          data.forEach(user => {
+            console.log(user)
           });
+        });
       }
-
-        // Calculate prices from all products
-
-        let total = 0
-        const tax = 0.15 // Tax is meant to be 15 percent
-        let subtotal = 0
-        let cartTotal = ''
-        const totalSummary = document.getElementById("total-summary");
-
-        for (let j = 0; j < prices.length; j++) {
-          subtotal += parstFloat(prices[j]).toFixed(2)
-        }
-        total += subtotal * 0.15
-
-        cartTotal += `
-        <div id="cart-total">
-          <h5>Total<h5>
-            <p>Subtotal: $${subtotal}</p>
-            <p>Tax (15%): $${total - subtotal}<p>
-            <b>Total: $${total}</b>
-        `
-
-        totalSummary.innerHTML += cartTotal
-      });
-
+      
+      })
+    
     </script>
   </body>
 </html>
