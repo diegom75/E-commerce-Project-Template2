@@ -214,7 +214,13 @@
             const email = document.getElementById('email').value;
             console.log(email);
             const exists = data.some(user => user.email == email);
-            console.log(exists)
+            console.log(exists);
+
+            if (exists = false) {
+              alert("Email is wrong!");
+            } else {
+              alert("Logged In!")
+            }
           });
         });
       }
