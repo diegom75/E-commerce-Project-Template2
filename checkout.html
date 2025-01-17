@@ -47,6 +47,10 @@
           <!-- Cart summary will be dynamically inserted here -->
         
         </div>
+        <div id="total-summary">
+          <!-- Total summary will be dynamically inserted here -->
+        
+        </div>
         <h2>Login</h2>
         <div class="form-group">
           <label for="email"
@@ -202,6 +206,17 @@
           </div>
       `;
         }
+
+        // Create subtotal, tax, and final total values here
+        
+        // turns all prices into numbers to do calculations
+        let productTotal = 0;
+        for (var j = 0; j < prices.length; j++) {
+          productTotal += parseFloat(prices[j]);
+
+        }
+
+        // Create subtotal, tax, and final total values here
 
         cartSummary.innerHTML = cartItem;
 
