@@ -41,16 +41,12 @@
     </nav>
 
     <div class="container mt-5">
-      <form id="checkout-form" action="confirmation.html" method="get"></form>
-      <h1>Checkout</h1>
-      <div id="cart-summary">
-        <!-- Cart summary will be dynamically inserted here -->
-      </div>
-      <h1>Total</h1>
-      <div id="total-summary">
-        <!-- Total and Tax should appear here -->
-      </div>
-      <form id="checkout-form">
+      <form id="checkout-form" action="confirmation.html" method="get">
+        <h1>Checkout</h1>
+        <div id="cart-summary">
+          <!-- Cart summary will be dynamically inserted here -->
+        
+        </div>
         <h2>Login</h2>
         <div class="form-group">
           <label for="email"
@@ -85,6 +81,7 @@
             type="text"
             class="form-control"
             id="address"
+            name="address"
             placeholder="Enter your address"
             required
           />
@@ -95,6 +92,7 @@
             type="text"
             class="form-control"
             id="apartment"
+            name="apartment"
             placeholder="Enter your apartment number (optional)"
           />
         </div>
@@ -104,13 +102,14 @@
             type="text"
             class="form-control"
             id="city"
+            name="city"
             placeholder="Enter your city"
             required
           />
         </div>
         <div class="form-group">
           <label for="state">State <span class="text-danger">*</span></label>
-          <select class="form-control" id="state" required>
+          <select class="form-control" id="state" name="state" required>
             <option value="">Select your state</option>
             <option value="AL">AL</option>
             <option value="AK">AK</option>
@@ -170,6 +169,7 @@
             type="text"
             class="form-control"
             id="zip"
+            name="zip"
             placeholder="Enter your zip code"
             required
           />
@@ -181,52 +181,56 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-      
-        const urlParam = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(window.location.search);
         const cartSummary = document.getElementById('cart-summary');
-        // First collects all of the parameters into separate arrays
+        // First collect all parameters into arrays
         const ids = urlParams.getAll('id');
         const names = urlParams.getAll('name');
-        const prices = urlParams.getAll('price')
+        const prices = urlParams.getAll('price');
 
         // Create cart items using a basic for loop
         const cartItems = [];
-        let cartItem = ''
+        let cartItem = '';
         for (let i = 0; i < ids.length; i++) {
           cartItem += `
           <div class="cart-item">
-            <h5>${names[i]}</h5>
-            <p>${parseFloat(prices[i]).toFixed(2)}</p>
-            <input type="hidden" name="id" value="${ids[i]}">
-            <input type="hidden" name="name" value="${names[i]}">
-            <input type="hidden" name="price" value="${prices[i]}">
-          `
+              <h5>${names[i]}</h5>
+              <p>$${parseFloat(prices[i]).toFixed(2)}</p>
+             <input type="hidden" name="id" value="${ids[i]}" />
+            <input type="hidden" name="name" value="${names[i]}" />
+            <input type="hidden" name="price" value="${prices[i]}" />
+          </div>
+      `;
         }
-      cartSummary.innerHTML = cartItem;
 
-      document.querySelector('#checkout-form').addEventListener('submit', submitCart);
+        cartSummary.innerHTML = cartItem;
 
+        document
+          .querySelector('#checkout-form')
+          .addEventListener('submit', submitCart);
+   
       function submitCart(event) {
         event.preventDefault();
-        console.log("submitted form");
-        fetch('users.json').then(response => response.json()).then(data => {
-          data.forEach(user => {
-            const email = document.getElementById('email').value;
-            console.log(email);
-            const exists = data.some(user => user.email == email);
-            console.log(exists);
+        console.log('submitted');
+        fetch('users.json')
+        .then(response => response.json())
+        .then(data => {
+        const form = document.getElementById('checkout-form');
+        const email = document.getElementById('email').value;
+        console.log(email);
+        const exists = data.some( user => user.email == email);
+        console.log(exists);
+        if (exists) {
+          form.submit();
+        } else {
+          const errorMessage = document.getElementById('error-message');
+          errorMessage.innerHTML = 'User does not exist';
+        }
 
-            if (exists = false) {
-              alert("Email is wrong!");
-            } else {
-              alert("Logged In!")
-            }
-          });
+
         });
       }
-      
-      })
-    
+      });
     </script>
   </body>
 </html>
