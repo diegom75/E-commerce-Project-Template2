@@ -10,5 +10,11 @@
       "name": "Chill Gay",
       "email": "def@email.com",
       "password": 456
+    },
+    {
+      "id": 3,
+      "name": "Chill Goy",
+      "email": "ghi@email.com",
+      "password": 789
     }
 ]
